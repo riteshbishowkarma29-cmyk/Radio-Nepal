@@ -1,0 +1,829 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>RITESH RADIO</title>
+
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+body {
+    background: #080d19;
+    color: white;
+    padding-bottom: 110px;
+}
+
+header {
+    background: #101a2e;
+    padding: 20px 6%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 1px solid #24324a;
+}
+
+.logo {
+    font-size: 25px;
+    font-weight: bold;
+    color: #00d9ff;
+}
+
+.logo span {
+    color: white;
+}
+
+.live {
+    color: #ff4444;
+    font-size: 13px;
+}
+
+.container {
+    width: 90%;
+    max-width: 1200px;
+    margin: auto;
+}
+
+.hero {
+    margin-top: 30px;
+    padding: 35px;
+    border-radius: 18px;
+    background: linear-gradient(120deg, #102e55, #123d68, #101a32);
+}
+
+.hero h1 {
+    font-size: 34px;
+    margin-bottom: 12px;
+}
+
+.hero p {
+    color: #bdcce0;
+    line-height: 1.6;
+}
+
+.search {
+    margin: 25px 0;
+}
+
+.search input {
+    width: 100%;
+    padding: 15px;
+    background: #17243a;
+    color: white;
+    border: 1px solid #30425d;
+    border-radius: 10px;
+    outline: none;
+    font-size: 16px;
+}
+
+.tabs {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    margin-bottom: 25px;
+}
+
+.tabs button {
+    border: 0;
+    padding: 11px 20px;
+    border-radius: 25px;
+    background: #1b2a40;
+    color: white;
+    cursor: pointer;
+}
+
+.tabs button.active,
+.tabs button:hover {
+    background: #00bfe9;
+    color: #07111f;
+}
+
+.section-title {
+    margin: 25px 0 18px;
+    font-size: 23px;
+}
+
+.stats {
+    display: flex;
+    gap: 15px;
+    flex-wrap: wrap;
+    margin-top: 20px;
+}
+
+.stat {
+    background: #17243a;
+    padding: 15px 20px;
+    border-radius: 10px;
+    color: #00d9ff;
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(210px, 1fr));
+    gap: 18px;
+}
+
+.station {
+    background: #121e32;
+    padding: 20px;
+    border-radius: 14px;
+    border: 1px solid #263750;
+    transition: .2s;
+}
+
+.station:hover {
+    transform: translateY(-4px);
+    border-color: #00d9ff;
+}
+
+.station-icon {
+    height: 85px;
+    background: linear-gradient(135deg, #07518a, #09243e);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 10px;
+    font-size: 35px;
+    margin-bottom: 15px;
+}
+
+.station h3 {
+    font-size: 17px;
+    margin-bottom: 8px;
+}
+
+.station p {
+    font-size: 12px;
+    color: #a8b8ce;
+    margin-bottom: 15px;
+}
+
+.station-actions {
+    display: flex;
+    gap: 8px;
+}
+
+.play-btn, .fav-btn {
+    padding: 10px;
+    border: 0;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+.play-btn {
+    flex: 1;
+    background: #00c8ef;
+    color: #061421;
+    font-weight: bold;
+}
+
+.fav-btn {
+    background: #283851;
+    color: white;
+    font-size: 17px;
+}
+
+footer {
+    text-align: center;
+    padding: 30px;
+    color: #8799b3;
+}
+
+/* Bottom music player */
+
+.player {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background: #111d30;
+    border-top: 1px solid #30425d;
+    padding: 15px 5%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 15px;
+    z-index: 10;
+}
+
+.now-playing {
+    min-width: 0;
+}
+
+.now-playing h3 {
+    font-size: 15px;
+}
+
+.now-playing p {
+    font-size: 12px;
+    color: #9aacc3;
+    margin-top: 5px;
+}
+
+.controls {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.controls button {
+    background: none;
+    color: white;
+    border: 0;
+    font-size: 25px;
+    cursor: pointer;
+}
+
+#volume {
+    width: 90px;
+}
+
+.status {
+    color: #00d9ff;
+    font-size: 12px;
+    margin-top: 7px;
+}
+
+@media(max-width:600px) {
+    header {
+        padding: 17px 5%;
+    }
+
+    .hero {
+        padding: 25px;
+    }
+
+    .hero h1 {
+        font-size: 25px;
+    }
+
+    .player {
+        padding: 13px;
+        flex-wrap: wrap;
+    }
+
+    .controls {
+        gap: 12px;
+    }
+
+    #volume {
+        width: 65px;
+    }
+
+    .grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 10px;
+    }
+
+    .station {
+        padding: 12px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+    <div class="logo">📻 <span>RADIO</span></div>
+    <div class="live">● LIVE RADIO</div>
+</header>
+
+<div class="container">
+
+    <section class="hero">
+        <h1>Welcome to  RADIO</h1>
+        <p>
+            Listen to Nepali FM, Nepali music, Nepali news
+            and English news from anywhere in the world.
+        </p>
+
+        <div class="stats">
+            <div class="stat">
+                <span id="stationCount">Loading...</span>
+                <br>Radio Stations
+            </div>
+            <div class="stat">
+                Nepal 🇳🇵
+                <br>Radio Network
+            </div>
+        </div>
+    </section>
+
+    <div class="search">
+        <input
+            type="text"
+            id="search"
+            placeholder="🔍 Search radio stations..."
+        >
+    </div>
+
+    <div class="tabs">
+        <button class="active" data-tab="all">All Radio</button>
+        <button data-tab="news">Nepali News</button>
+        <button data-tab="english">English News</button>
+        <button data-tab="music">Music</button>
+        <button data-tab="favorites">❤️ Favorites</button>
+    </div>
+
+    <h2 class="section-title" id="heading">All Nepali Radio Stations</h2>
+
+    <div class="grid" id="stations">
+        <p>Loading Nepali radio stations...</p>
+    </div>
+
+</div>
+
+<footer>
+    <h3>📻  RADIO</h3>
+    <p>Made for Nepali Radio Lovers 🇳🇵</p>
+    <p>© 2026 RADIO. All rights reserved.</p>
+</footer>
+
+<div class="player">
+
+    <div class="now-playing">
+        <h3 id="currentName">No Station Selected</h3>
+        <p id="currentStatus">Choose a radio station</p>
+        <div class="status" id="status">Ready to play</div>
+    </div>
+
+    <div class="controls">
+        <button onclick="togglePlay()" id="playPause">▶</button>
+        <button onclick="stopRadio()">■</button>
+        <input
+            type="range"
+            id="volume"
+            min="0"
+            max="1"
+            step="0.01"
+            value="0.8"
+        >
+    </div>
+
+</div>
+
+<audio id="audio" preload="none"></audio>
+
+<script>
+
+// RADIO PLAYER
+
+const audio = document.getElementById("audio");
+
+let allStations = [];
+let currentStation = null;
+let currentTab = "all";
+
+let favorites = JSON.parse(
+    localStorage.getItem("radio_favorites") || "[]"
+);
+
+// Some known Nepali radio stations with direct stream URLs
+
+const featuredStations = [
+
+    {
+        name: "Radio Nepal",
+        url: "https://stream1.radionepal.gov.np/live/",
+        category: "news",
+        country: "Nepal",
+        tags: "news nepali national"
+    },
+
+    {
+        name: "Radio Kantipur",
+        url: "https://radio-broadcast.ekantipur.com/stream",
+        category: "music",
+        country: "Kathmandu",
+        tags: "music news nepali"
+    },
+
+    {
+        name: "Kalika FM 95.2",
+        url: "https://streaming.softnep.net:10828/stream",
+        category: "music",
+        country: "Nepal",
+        tags: "music nepali"
+    },
+
+    {
+        name: "BBC World Service",
+        url: "https://stream.live.vc.bbcmedia.co.uk/bbc_world_service",
+        category: "english",
+        country: "International",
+        tags: "english news"
+    }
+
+];
+
+// LOAD RADIO BROWSER DATABASE
+
+async function loadStations() {
+
+    const box = document.getElementById("stations");
+
+    try {
+
+        const response = await fetch(
+            "https://de1.api.radio-browser.info/json/stations/search?countrycode=NP&limit=250&hidebroken=true&order=clickcount&reverse=true"
+        );
+
+        if (!response.ok) {
+            throw new Error("Radio database unavailable");
+        }
+
+        const data = await response.json();
+
+        const databaseStations = data
+            .filter(s => s.name && s.url_resolved)
+            .map(s => {
+
+                const tags = (
+                    s.tags || ""
+                ).toLowerCase();
+
+                return {
+                    name: s.name,
+                    url: s.url_resolved,
+                    category: "music",
+                    country: s.state || s.country || "Nepal",
+                    tags: tags,
+                    favicon: s.favicon || ""
+                };
+
+            });
+
+        allStations = [
+            ...featuredStations,
+            ...databaseStations
+        ];
+
+        // Remove duplicate names and URLs
+
+        const unique = new Map();
+
+        allStations.forEach(s => {
+            unique.set(
+                (s.name + s.url).toLowerCase(),
+                s
+            );
+        });
+
+        allStations = Array.from(unique.values());
+
+        document.getElementById("stationCount").innerText =
+            allStations.length + "+";
+
+        renderStations();
+
+    } catch (error) {
+
+        allStations = [...featuredStations];
+
+        document.getElementById("stationCount").innerText =
+            allStations.length + "+";
+
+        box.innerHTML = `
+            <p>
+            Could not load the full station directory.
+            Check your internet connection and refresh.
+            The featured stations are still available.
+            </p>
+        `;
+
+        renderStations();
+
+    }
+
+}
+
+// CATEGORY FILTER
+
+function getCategory(station) {
+
+    const tags = station.tags.toLowerCase();
+    const name = station.name.toLowerCase();
+
+    if (
+        name.includes("radio nepal") ||
+        name.includes("ujyaalo") ||
+        name.includes("cin khabar") ||
+        name.includes("bbc nepali") ||
+        name.includes("image news")
+    ) {
+        return "news";
+    }
+
+    if (
+        name.includes("bbc world") ||
+        name.includes("world service")
+    ) {
+        return "english";
+    }
+
+    if (
+        tags.includes("news") &&
+        (
+            tags.includes("english") ||
+            name.includes("bbc")
+        )
+    ) {
+        return "english";
+    }
+
+    if (
+        tags.includes("music") ||
+        tags.includes("folk") ||
+        tags.includes("pop") ||
+        tags.includes("entertainment") ||
+        name.includes("music")
+    ) {
+        return "music";
+    }
+
+    return "all";
+}
+
+// DISPLAY STATIONS
+
+function renderStations() {
+
+    const box = document.getElementById("stations");
+
+    const search = document
+        .getElementById("search")
+        .value.toLowerCase();
+
+    let filtered = allStations.filter(station => {
+
+        const matchesSearch =
+            station.name.toLowerCase().includes(search) ||
+            station.country.toLowerCase().includes(search) ||
+            station.tags.toLowerCase().includes(search);
+
+        if (!matchesSearch) return false;
+
+        if (currentTab === "favorites") {
+            return favorites.includes(station.url);
+        }
+
+        if (currentTab === "news") {
+            return getCategory(station) === "news";
+        }
+
+        if (currentTab === "english") {
+            return getCategory(station) === "english";
+        }
+
+        if (currentTab === "music") {
+            return getCategory(station) === "music";
+        }
+
+        return true;
+
+    });
+
+    document.getElementById("heading").innerText = {
+        all: "All Nepali Radio Stations",
+        news: "Nepali News Radio",
+        english: "English News Radio",
+        music: "Music Radio Stations",
+        favorites: "Your Favourite Stations"
+    }[currentTab];
+
+    if (filtered.length === 0) {
+
+        box.innerHTML = `
+            <p>No stations found. Try another search.</p>
+        `;
+
+        return;
+    }
+
+    box.innerHTML = "";
+
+    filtered.forEach(station => {
+
+        const isFav = favorites.includes(station.url);
+
+        const card = document.createElement("div");
+
+        card.className = "station";
+
+        const icon = document.createElement("div");
+        icon.className = "station-icon";
+        icon.textContent = "📻";
+
+        const name = document.createElement("h3");
+        name.textContent = station.name;
+
+        const details = document.createElement("p");
+        details.textContent =
+            station.country + " • " +
+            (getCategory(station) === "news"
+                ? "News"
+                : getCategory(station) === "english"
+                    ? "English News"
+                    : "Music / Radio");
+
+        const actions = document.createElement("div");
+        actions.className = "station-actions";
+
+        const play = document.createElement("button");
+        play.className = "play-btn";
+        play.textContent = "▶ Play";
+
+        play.addEventListener("click", () => {
+            playStation(station);
+        });
+
+        const fav = document.createElement("button");
+        fav.className = "fav-btn";
+        fav.textContent = isFav ? "❤️" : "♡";
+
+        fav.addEventListener("click", () => {
+            toggleFavorite(station.url);
+        });
+
+        actions.append(play, fav);
+
+        card.append(icon, name, details, actions);
+
+        box.appendChild(card);
+
+    });
+
+}
+
+// PLAY STATION
+
+function playStation(station) {
+
+    currentStation = station;
+
+    audio.src = station.url;
+
+    audio.play()
+        .then(() => {
+
+            document.getElementById("currentName").innerText =
+                station.name;
+
+            document.getElementById("currentStatus").innerText =
+                "Internet Radio • " + station.country;
+
+            document.getElementById("status").innerText =
+                "● LIVE PLAYING";
+
+            document.getElementById("playPause").innerText = "⏸";
+
+        })
+        .catch(() => {
+
+            document.getElementById("status").innerText =
+                "Stream unavailable. Try another station.";
+
+        });
+
+}
+
+// PLAY / PAUSE
+
+function togglePlay() {
+
+    if (!audio.src) {
+        document.getElementById("status").innerText =
+            "Select a station first";
+        return;
+    }
+
+    if (audio.paused) {
+
+        audio.play().catch(() => {
+            document.getElementById("status").innerText =
+                "Unable to play this stream";
+        });
+
+    } else {
+
+        audio.pause();
+
+    }
+
+}
+
+// STOP
+
+function stopRadio() {
+
+    audio.pause();
+    audio.removeAttribute("src");
+    audio.load();
+
+    document.getElementById("currentName").innerText =
+        "No Station Selected";
+
+    document.getElementById("currentStatus").innerText =
+        "Choose a radio station";
+
+    document.getElementById("status").innerText =
+        "Stopped";
+
+    document.getElementById("playPause").innerText = "▶";
+
+}
+
+// AUDIO EVENTS
+
+audio.addEventListener("play", () => {
+    document.getElementById("playPause").innerText = "⏸";
+});
+
+audio.addEventListener("pause", () => {
+    document.getElementById("playPause").innerText = "▶";
+});
+
+audio.addEventListener("error", () => {
+    if (currentStation) {
+        document.getElementById("status").innerText =
+            "Stream error. Try another station.";
+    }
+});
+
+// VOLUME
+
+document.getElementById("volume").addEventListener(
+    "input",
+    function() {
+        audio.volume = this.value;
+    }
+);
+
+audio.volume = 0.8;
+
+// FAVORITES
+
+function toggleFavorite(url) {
+
+    if (favorites.includes(url)) {
+
+        favorites = favorites.filter(item => item !== url);
+
+    } else {
+
+        favorites.push(url);
+
+    }
+
+    localStorage.setItem(
+        "riteshradio_favorites",
+        JSON.stringify(favorites)
+    );
+
+    renderStations();
+
+}
+
+// TAB BUTTONS
+
+document.querySelectorAll(".tabs button").forEach(button => {
+
+    button.addEventListener("click", () => {
+
+        document.querySelectorAll(".tabs button").forEach(b => {
+            b.classList.remove("active");
+        });
+
+        button.classList.add("active");
+
+        currentTab = button.dataset.tab;
+
+        renderStations();
+
+    });
+
+});
+
+// SEARCH
+
+document.getElementById("search").addEventListener(
+    "input",
+    renderStations
+);
+
+// START APP
+
+loadStations();
+
+</script>
+
+</body>
+</html>
+5
